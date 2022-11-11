@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Plan</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/main.js" defer></script>
+    <style>
+        #output li {
+            background: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="what_to_bring">
+            <div class="title">
+                <img src="/img/plane.png" alt="">
+                <p>What to bring...</p>
+            </div>
+            <div class="chat"><input type="text" id="name" placeholder="NAME">
+                <input id="bringing" type="text" placeholder="BRING"><button id="send1">　SEND　</button>
+            </div>
+            <form class="form">
+                <p id="output_bring"></p>
+            </form>
+
+            <div class="button"><button>　ALL CHECKED?　</button></div>
+
+        </div>
+
+    </div>
+
+    <!-- <input type="checkbox" id="chkbx" name="chkbx" />
+    <input type="checkbox" id="chkbx" name="chkbx" /> -->
+
+
+
+    <!-- <div class="what_to_do">
+        <p>What to do</p>
+        <div><input id="plans_form" type="text"><button id="send2">send</button></div>
+        <ul id="output_todo">
+            <label for="plans" name="plans">plans</label>
+        </ul>
+        <div><button>done</button></div>
+    </div> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+        // 🔽 追加 / `9.2.0`の部分を↑のFirestoreから貼り付けたコードのバージョンに合わせる
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            setDoc,
+            getDoc,
+            serverTimestamp,
+            query, //並び替えなど指定するときに（例えばorderByとか）一緒に必要になる
+            orderBy, //並び替え
+            onSnapshot, //保存データを取り出すためのやつ
+            doc,
+            updateDoc,
+        } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAMhOBnmVf-AydT0r0M8tmYVGQJ9VknHjk",
+            authDomain: "what-to-bring-b7960.firebaseapp.com",
+            projectId: "what-to-bring-b7960",
+            storageBucket: "what-to-bring-b7960.appspot.com",
+            messagingSenderId: "896940630765",
+            appId: "1:896940630765:web:f35d9a3e07a36499b0e2e4"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 送信時に必要な処理
+        $("#send1").on("click", function () {
+            // console.log("#name");
+            // console.log("#bringing");
+            const postData1 = {
+                name: $("#name").val(),
+                bringing: $("#bringing").val(),
+                check: false,///????????チェックした時に送受信させる！！
+            };
+            // console.log(postData1);
+            addDoc(collection(db, "bring_list"), postData1);
+            $("#bringing").val("");
+
+            // const blankCheckbox = postData1.check;
+            // console.log(blankChekbox);
+
+        });
+
+        // JQUERYチェックボックスの変更
+        $(document).on("change", "input[name = 'chkbx']", function () { //https://qumeru.com/magazine/440 //追加されているチェックボックスに対しては反応がなかった
+            // console.log('checkbox is checked.');
+            let getId = $(this).parent().attr('id');
+            console.log(getId);
+            // 上、親要素からIDを抽出
+            // const docRef = doc(db, "bring_list", getId);
+            // const docSnap = getDoc(docRef);
+            // const postRef = db.collection('bring_list').doc($(this).parent().attr('id'));
+            const checkboxClick = doc(db, "bring_list", getId);
+            console.log(checkboxClick.data);
+            // if (checkboxClick === false) {
+            updateDoc(checkboxClick, {
+                check: true
+            });
+
+            // }
+            // else {
+            if (checkboxClick === true) {
+                updateDoc(checkboxClick, {
+                    check: false
+                });
+            }
+        });
+
+
+        // db.collection("users").doc("xxxxxxxx").delete().then(() => {
+        //     console.log("削除しました");
+        // })
+        //     .catch((error) => {
+        //         console.log(`削除に失敗しました (${error})`);
+        //     });
+        ///////////////////////////////////////
+
+        // 条件分岐で
+        // setDoc(doc(db, "bring_list", getId), {
+        //     check: true,
+        //     name: 
+        //     bringing:
+        // });
+
+        // ${ document.data.${document.data.name} : ${document.data.bringing}} : ${ document.data.bringing }
+        // const checkboxClick = doc(db, "bring_list", "17rVag8911yuzuDAKdPc");
+        // console.log(checkboxClick.data());
+        // if (checkboxClick === 0) {
+        //     checkboxClick++;
+
+        // } console.log(checkboxClick);
+
+
+        //チェックボックスを更新する！！！/////////////////////////
+        //////////////////////////////////////////////
+        // const checkboxClick = doc(db, document.id);
+        // console.log(checkboxClick);
+        // $("#${document.data.check}").on("click", function () {
+        //     if ((this) === 0) {
+
+        //         console.log("#output_bring");
+        //     }
+        // });
+        //////////////////////////////////////////
+
+        // データを取り出すための処理 FIREBASEのどこから？をかく
+        onSnapshot(collection(db, "bring_list"), (querySnapshot) => {
+            // console.log(querySnapshot.docs);
+            const documents = [];
+            querySnapshot.docs.forEach(function (doc) {
+                const document = {
+                    id: doc.id,
+                    data: doc.data(),
+                };
+                documents.push(document);
+            });
+            console.log(documents);
+
+            // 画面を表示させる処理の際にIF文でチェックボックスにチェックかどうかを入れる
+            const htmlElements = [];
+            documents.forEach(function (document) {
+                console.log(document.id);
+                if (document.data.check === false) {
+                    // updateDoc(checkboxClick, {
+                    //     check: true
+                    // });
+                    //////falseなら
+                    htmlElements.push(`
+                <p id="${document.id}">
+                    <input name="chkbx" type="checkbox" id="${document.data.check}">${document.data.name} : ${document.data.bringing}
+                    </p>
+                `);
+                    // updateDocTrue(document.id);
+                } else { ///trueならチェックボックスチェックする
+                    htmlElements.push(`
+                <p id="${document.id}">
+                    <input name="chkbx" type="checkbox" checked id="${document.data.check}">${document.data.name} : ${document.data.bringing}
+                    </p>
+                `);
+
+                }
+                // if (htmlElements[length - 1].indexOf("checked")) {
+                //     console.log("ok");
+                // }
+            });
+
+
+            // console.log(htmlElements);
+            $("#output_bring").html(htmlElements);
+
+            // const checkboxClick = doc(db, "bring_list", "postData1");
+            // console.log(checkboxClick);
+        });
+        // function updateDocTrue(id) {
+        //     updateDoc(document.id, {
+        //         check: true
+        //     });
+
+
+
+
+        // JQUERYチェックボックスの変更
+        // $(document).on("change", "input[name = 'chkbx']", function () { //https://qumeru.com/magazine/440 //追加されているチェックボックスに対しては反応がなかった
+        //     // console.log('checkbox is checked.');
+        //     let getId = $(this).parent().attr('id');
+        //     // console.log(getId);上、親要素からIDを抽出
+        //     const checkboxClick = doc(db, "bring_list", getId);
+        //     if (checkboxClick === false) {
+        //         updateDoc(checkboxClick, {
+        //             check: true
+        //         });
+
+        //     } else {
+        //         updateDoc(checkboxClick, {
+        //             check: false
+        //         });
+        //     }
+        // });
+
+    </script>
+</body>
+
+</html>

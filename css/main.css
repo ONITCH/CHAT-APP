@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: /; */
+    outline: none;
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #4f5d73;
+}
+
+body.div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.what_to_bring {
+    width: 400px;
+    height: 600px;
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+
+}
+
+.title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 80px;
+    background-color: #77b3d4;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    border-color: black;
+}
+
+.client-info {
+    color: #fff;
+    padding: 15px;
+}
+
+.chat {
+    width: 100px;
+    padding: 0px 15px;
+    position: relative;
+    font-size: 20px;
+    margin-left: 20px;
+
+}
+
+#output_bring {
+    margin-top: 20px;
+    margin-left: 40px
+}
+
+input {
+    width: 50px;
+}
+
+#name {
+    width: 200px;
+    height: 30px;
+    margin-top: 20px;
+}
+
+#bringing {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+#send1 {
+    margin-top: 10px;
+    display: flex;
+}
+
+#output_bring {
+    background-color: #20498a;
+    color: #fff;
+    margin-right: 40px;
+    opacity: 70%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 50px;
+
+
+}

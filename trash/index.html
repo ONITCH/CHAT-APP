@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文字列置換ツール｜ちょっと便利なツール・ジェネレーター置き場</title>
+    <meta name="description" content="文章内の特定の文字の変換（置き換え）ができます、変換先を空欄にすると削除も可能です">
+    <link rel="shortcuticon" href="../favicon.ico">
+    <link rel="stylesheet" href="./css/main.css">
+    <script type='text/javascript' src='https://code.jquery.com/jquery-1.10.0.min.js'></script>
+    <script type='text/javascript' src='../common.js'></script>
+    <script type='text/javascript' src='main.js'></script>
+    <link href="../iCm/flat/red.css" rel="stylesheet">
+    <script src="../iCm/icheck.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+            <ul class="clearfix">
+                <li><a href="../">ちょっと便利なツール・ジェネレーター置き場</a></li>
+                <li>文字列置換ツール</li>
+            </ul>
+            <h1>文字列置換ツール</h1>
+            <p>一括で文字の置き換えができます</p>
+        </header>
+
+        <div id="property">
+
+            <p class="h2-icon">設定</p>
+
+            <label><input id="check" type="checkbox" checked></label>
+            <input id="before-txt" type="text" value="文字" style="margin-right: 0;" />→<input id="after-txt" type="text"
+                value="①" />
+
+            <label><input id="check2" type="checkbox" checked></label>
+            <input id="before-txt2" type="text" value="こ" style="margin-right: 0;" />→<input id="after-txt2" type="text"
+                value="②" /><br />
+
+            <label><input id="check3" type="checkbox"></label>
+            <input id="before-txt3" type="text" value="" style="margin-right: 0;" disabled="disabled" />→<input
+                id="after-txt3" type="text" value="" disabled="disabled" />
+
+            <label><input id="check4" type="checkbox"></label>
+            <input id="before-txt4" type="text" value="" style="margin-right: 0;" disabled="disabled" />→<input
+                id="after-txt4" type="text" value="" disabled="disabled" />
+
+
+        </div>
+        <hr class="clear20">
+
+        <p id="clear-button" class="button">クリア</p>
+        <label class="fr" style="padding-top: 14px;"><input id="select-check" type="checkbox" checked>クリックで全選択</label>
+
+        <hr class="clear">
+
+        <textarea id="input">ここに文字を入力してください。&#13;&#13;指定の文字を一括で置き換えます。&#13;文字っ。</textarea>
+        <div class="to"></div>
+        <textarea id="preview" readonly></textarea>
+
+        <footer id="footer">
+            <p>© ちょっと便利なツール・ジェネレーター置き場</p>
+        </footer>
+    </div>
+    <div id="bottom">
+        <div id="ad">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle" style="display:inline-block;width:970px;height:250px"
+                data-ad-client="ca-pub-3348650817917523" data-ad-slot="4368518074"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
