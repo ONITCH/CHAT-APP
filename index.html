@@ -70,7 +70,7 @@
         } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyAMhOBnmVf-AydT0r0M8tmYVGQJ9VknHjk",
+            apiKey: "",
             authDomain: "what-to-bring-b7960.firebaseapp.com",
             projectId: "what-to-bring-b7960",
             storageBucket: "what-to-bring-b7960.appspot.com",
@@ -108,6 +108,8 @@
             // const docRef = doc(db, "bring_list", getId);
             // const docSnap = getDoc(docRef);
             // const postRef = db.collection('bring_list').doc($(this).parent().attr('id'));
+            // const firebase = db.collection('chat').doc('EkgDlCCHIFFjARXWq6TI').get();
+            // console.log(firebase);
             const checkboxClick = doc(db, "bring_list", getId);
             console.log(checkboxClick.data);
             // if (checkboxClick === false) {
